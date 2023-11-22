@@ -14,10 +14,8 @@ mtrx_of_symb = [['1', '2', '3', '+'],
 
 canva = tk.Canvas(window, height=WINDOW_MAX_WIDTH, width=WINDOW_MAX_HEIGHT, bg='light blue')
 canva.pack()
-# lb = tk.Label(text = "Welcome to my calculator!", fg = "white", bg="Orange").pack()
-# entry = tk.Entry(fg="white", bg="blue", width=50).pack()
 canva.create_rectangle(10,100, 290, 390, outline="black")
-click_btn= tk.PhotoImage(file='/Users/pavtim127/Desktop/MyCalculatorNotJava228/one_resized.png')
+img= tk.PhotoImage(file='/Users/pavtim127/Desktop/MyCalculatorNotJava228/one_resized.png')
 def create_button(symbol):
     x_pos = 10
     y_pos = 100
@@ -29,7 +27,7 @@ def create_button(symbol):
             btn.pack() 
             x_pos += 50*j
             btn.place(x=x_pos, y=y_pos)
-btn = tk.Button(window, image=click_btn, width=DEFAULT_IMAGE_BUTTON_WIDTH, height=DEFAULT_IMAGE_BUTTON_HEIGTH)
+btn = tk.Button(window, image=img, width=DEFAULT_IMAGE_BUTTON_WIDTH, height=DEFAULT_IMAGE_BUTTON_HEIGTH)
 btn.pack()
 btn.place(x=150,y=150)
 window.mainloop()
