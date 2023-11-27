@@ -5,7 +5,7 @@ window.title('Calculator')
 WINDOW_MAX_WIDTH = 200
 WINDOW_MAX_HEIGHT = 300
 DEFAULT_IMAGE_BUTTON_WIDTH = 20
-DEFAULT_IMAGE_BUTTON_HEIGHT = 20
+DEFAULT_IMAGE_BUTTON_HEIGHT = 25
 window.geometry(str(WINDOW_MAX_WIDTH) + "x" + str(WINDOW_MAX_HEIGHT))
 window.resizable(0, 0)
 
@@ -20,7 +20,7 @@ button_frame.place(x=0, y=0)
 string = tk.StringVar(window)
 
 entry = tk.Entry(window, textvariable=string, width=20, bg="cyan4", justify='right')
-entry.place(x=4, y=50)
+entry.place(x=4, y=4)
 
 def update_entry(symb):
     current_value = string.get()
@@ -80,7 +80,7 @@ def btn_clck(c_symb):
             c_symb = "*"
             update_entry(c_symb)
         case "devision_sign.png":
-            c_symb = "/"
+            c_symb = "÷"
             update_entry(c_symb)
         case "equal_sign.png":
             counting()
@@ -88,12 +88,11 @@ def btn_clck(c_symb):
         case "AC.png":
             clear_entry()
 
-    print("Button works!", c_symb)
 
 def create_button(symb_matrix):
     image_file_path = "/Users/pavtim127/Desktop/MyCalculatorNotJava228/symbols/"
     x_pos = 15
-    y_pos = 60
+    y_pos = 0
 
     for i in range(len(symb_matrix)):
         x_pos = 15
@@ -130,18 +129,16 @@ def create_button(symb_matrix):
                 case "multiplication sign":
                     sign = "*"
                 case "devision sign":
-                    sign = ":"
+                    sign = "÷"
                 case "equal sign":
                     sign = "="
-            
             btn = tk.Button(window, image=img, width=DEFAULT_IMAGE_BUTTON_WIDTH,
                             height=DEFAULT_IMAGE_BUTTON_HEIGHT,
                             text=sign,
                             compound=tk.TOP,  
                             command=lambda c_symb=current_symb: btn_clck(c_symb),
                             relief=tk.GROOVE, 
-                            bd=2,
-                            font=('Arial', 15))
+                            font=('Arial', 17))
 
             btn.place(x=x_pos, y=y_pos)
             x_pos += 46 + j
