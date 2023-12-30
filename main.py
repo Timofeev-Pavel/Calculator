@@ -12,8 +12,8 @@ ALLOWED_IN_BUFFER_REGEX_PATTERN = re.compile(r'[\d\-\+\*/]')
 mtrx_of_symb = [['one_resized.png', 'two_resized.png', 'three_resized.png', 'plus_sign.png'],
                 ['four_resized.png', 'five_resized.png', 'six_resized.png', 'minus_sign.png'],
                 ['seven_resized.png', 'eight_resized.png', 'nine_resized.png', 'multiplication_sign.png'],
-                ['AC.png', 'zero_resized.png', 'equal_sign.png', 'devision_sign.png'],
-                ["nothing.png", "nothing.png", "nothing.png", "nothing.png"]]
+                ['AC_.png', 'zero_resized.png', 'equal_sign.png', 'devision_sign.png'],
+                ["nothing_.png", "nothing_.png", "nothing_.png", "nothing_.png"]]
 
 # def create_matrix(matrix_rows, matrix_columns, map):
     
@@ -55,33 +55,34 @@ def evaluate_buffer():
 
 def create_button(symb_matrix):
     # FIXME: use os library to get current directory
-    image_file_path = "/Users/pavtim127/Desktop/MyCalculatorNotJava228/symbols/"
+
     # FIXME: all coordinate positions should be defined as constant variables
     # e.g x_pos -> X_AXIS_OFFSET
-    y_pos = 0
+    # FIXED
+    y_pos = Y_AXIS_OFFSET
 
     for i in range(len(symb_matrix)):
-        x_pos = 15
-        y_pos += i + 48
+        x_pos = X_AXIS_OFFSET
+        y_pos += i + DISTANCE_BETWEEN_BUTTONS
         for j in range(len(symb_matrix[i])):
-            button_image = tk.PhotoImage(file=image_file_path + symb_matrix[i][j])
             current_symb = symb_matrix[i][j]
-
-            # FIXME: this string cutting is too complicated, simlify
-            sign = current_symb.split('.')[0].replace('_resized', '').replace('_', ' ')
-
+            if current_symb == "nothing_.png":
+                continue
+            sign = current_symb.split('_')[0]
             button_sign_text = getButtonSignText(sign)
+
+            button_image = tk.PhotoImage(file=image_file_path + current_symb)
             
             btn = tk.Button(window, image=button_image, width=DEFAULT_IMAGE_BUTTON_WIDTH,
                             height=DEFAULT_IMAGE_BUTTON_HEIGHT,
                             text=button_sign_text,
-                            compound=tk.TOP,  
-                            command=lambda event, button_sign_text=button_sign_text: update_entry(button_sign_text),
+                            compound=tk.BOTTOM,  
+                            command=lambda button_sign_text=button_sign_text: update_entry(button_sign_text),
                             relief=tk.GROOVE, 
-                            font=('Arial', 17))
+                            font=('Arial', FONT_SIZE))
 
             btn.place(x=x_pos, y=y_pos)
-            x_pos += 46 + j
+            x_pos += DISTANCE_BETWEEN_BUTTONS + j
             btn.bind('<Button-1>', lambda event, button_sign_text=button_sign_text: update_entry(button_sign_text))
 
 def getButtonSignText(signToMatch):
@@ -106,15 +107,15 @@ def getButtonSignText(signToMatch):
             return "9"
         case "zero":
             return "0"
-        case "plus sign":
+        case "plus":
             return "+"
-        case "minus sign":
+        case "minus":
             return "-"
-        case "multiplication sign":
+        case "multiplication":
             return "*"
-        case "devision sign":
+        case "devision":
             return "/"
-        case "equal sign":
+        case "equal":
             return "="
         case "nothing":
             return ""
